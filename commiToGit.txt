@@ -1,0 +1,4 @@
+git remote add origin https://github.com/gosh1985/loc.git
+
+
+git push -u origin master

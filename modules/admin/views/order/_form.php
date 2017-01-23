@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Order */
@@ -12,7 +14,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+  <?php
+    echo  DatePicker::widget([
+        'name' => $model->created_at,
+        'value' => date('d-M-Y', strtotime('+2 days')),
+        'options' => ['placeholder' => 'Дата создания ...'],
+        'pluginOptions' => [
+            'format' => 'dd-M-yyyy',
+            'todayHighlight' => true
+        ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
 
@@ -20,7 +32,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sum')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ '0', '1', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->dropDownList([ '0'=>'Активен', '1'=>'Обработан', ]
+    //, ['prompt' => '']
+    ) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
