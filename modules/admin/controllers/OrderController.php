@@ -5,14 +5,13 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Order;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * OrderController implements the CRUD actions for Order model.
  */
-class OrderController extends Controller
+class OrderController extends AppAdminController
 {
     /**
      * @inheritdoc
@@ -37,6 +36,14 @@ class OrderController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Order::find(),
+            'pagination' => [
+            'pageSize' => 5
+            ],
+            'sort' =>[
+              'defaultOrder' =>[
+                'status' => SORT_ASC
+              ]
+            ],
         ]);
 
         return $this->render('index', [
